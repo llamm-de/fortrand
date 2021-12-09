@@ -24,6 +24,7 @@ module fr_sampling
     public :: normal_dist
     public :: shift_normal_distributed
     public :: exponential_dist
+    public :: erlang_dist
     
 contains
 

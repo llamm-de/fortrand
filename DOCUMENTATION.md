@@ -122,5 +122,25 @@ real(kind=8), parameter    :: lambda = 2.5d0
 real(kind=8), dimension(N) :: rand_number_list
 rand_number_list = exponential_dist(N, lambda)
 ```
-Here ```lambda > 0``` defines the rate of the exponential distribution.
+Please use the following arguments within the function call:
+| Argument | Optional | Restrictions | Description |
+| -------- | :------: | ------------ | :---------- |
+| N        | No       | N > 0        | Number of samples to be drawn |
+| lambda   | No       | lambda > 0   | Rate parameter |
+
+### Erlang distribution
+Sampling from the erlang distribution is achieved by using the inversion method. You can use this method via the ```erlang_dist``` function, e.g.
+```Fortran
+integer, parameter         :: N = 1000
+real(kind=8), parameter    :: lambda = 2.5d0
+integer, parameter         :: k = 3
+real(kind=8), dimension(N) :: rand_number_list
+rand_number_list = erlang_dist(N, lambda, k)
+```
+Please use the following arguments within the function call:
+| Argument | Optional | Restrictions | Description |
+| -------- | :------: | ------------ | :---------- |
+| N        | No       | N > 0        | Number of samples to be drawn |
+| lambda   | No       | lambda > 0   | Rate parameter |
+| k        | No       | k > 1        | Shape parameter |
 
