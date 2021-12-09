@@ -195,4 +195,39 @@ contains
 
     end function exponential_dist
 
+    !> Interface function to compute an array of NUM_SAMPLES samples 
+    !! from erlang distribution using the inversion method
+    function erlang_dist(num_samples, lambda, k) result(samples)
+
+        integer, intent(in)                   :: num_samples
+        real(kind=dp), intent(in)             :: lambda
+        integer, intent(in)                   :: k
+        real(kind=dp), dimension(num_samples) :: samples
+        real(kind=8)                          :: u
+        integer                               :: i
+        integer                               :: j
+        real(kind=8)                          :: tmp
+
+        ! Check for input consistency
+        if (lambda <= 0) then 
+            write(*,'(A, F6.2, A)') "ERLANG_DIST(n,lambda,k): Argument lambda = ", lambda ," must always be greater than 0!" 
+            error stop
+        end if
+        if (k < 1) then 
+            write(*,'(A, I3, A)') "ERLANG_DIST(n,lambda,k): Argument k = ", k ," must always be greater than 1!" 
+            error stop
+        end if
+
+        samples = 0.d0
+        do i=1,num_samples,1
+            tmp = 0.d0
+            do j = 1,k,1
+                u = random()
+                tmp = tmp + log(u)
+            end do 
+            samples(i) = -1/lambda*tmp
+        end do
+
+    end function erlang_dist
+
 end module fr_sampling
