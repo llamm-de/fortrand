@@ -78,6 +78,7 @@ coin_flips = bernoulli(N)
 FortRAND also gives you the possibility to draw samples from various probability distributions. Distributions supported are currently:
 - Normal Distribution
 - Exponential Distribution
+- Erlang distribution
 
 To use the sampling possibilities, you would need to include the ```sampling``` module to your code via
 ```Fortran
