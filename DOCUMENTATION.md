@@ -145,3 +145,17 @@ Please use the following arguments within the function call:
 | lambda   | No       | lambda > 0   | Rate parameter |
 | k        | No       | k > 1        | Shape parameter |
 
+### Students t-distribution
+Sampling from the students t-distribution is achieved by using the adapted polar method by [Bailey (1994)](https://doi.org/10.1090/S0025-5718-1994-1219702-8). You can use this method via the ```t_dist``` function, e.g.
+```Fortran
+integer, parameter         :: N = 1000
+real(kind=8), parameter    :: nu = 2.5d0
+real(kind=8), dimension(N) :: rand_number_list
+rand_number_list = t_dist(N, nu)
+```
+Please use the following arguments within the function call:
+| Argument | Optional | Restrictions | Description |
+| -------- | :------: | ------------ | :---------- |
+| N        | No       | N > 0        | Number of samples to be drawn |
+| nu       | No       | nu > 0       | Shape parameter |
+

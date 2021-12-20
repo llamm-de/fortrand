@@ -1,7 +1,7 @@
 !> Examples and testing of FortRAND
 program example
 
-    use fr_sampling, only: dp, normal_dist, shift_normal_distributed, exponential_dist
+    use fr_sampling, only: dp, normal_dist, shift_normal_distributed, exponential_dist, t_dist
     use fr_random,   only: random
 
     implicit none
@@ -82,6 +82,13 @@ program example
     ! Get a list of N pseudo-random real numbers from exponential distribution
     random_number_list = exponential_dist(N, 2.d0)
     write(*,'(A)') "List of N pseudo-random real numbers from exponential distribution with exponential_dist(N, lambda):"
+    do i=1,N,1
+        write(*,'(5X, I2, A, F7.4)') i, ": ", random_number_list(i)
+    end do
+
+    ! Get a list of N pseudo-random real numbers from student t-distribution
+    random_number_list = t_dist(N, 2.d0)
+    write(*,'(A)') "list of N pseudo-random real numbers from student t-distribution with t_dist(N, lambda):"
     do i=1,N,1
         write(*,'(5X, I2, A, F7.4)') i, ": ", random_number_list(i)
     end do

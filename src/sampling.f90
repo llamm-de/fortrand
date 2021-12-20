@@ -25,7 +25,8 @@ module fr_sampling
     public :: shift_normal_distributed
     public :: exponential_dist
     public :: erlang_dist
-    
+    public :: t_dist
+
 contains
 
     !> Interface function to compute an array of NUM_SAMPLES samples from normal distribution
@@ -230,5 +231,29 @@ contains
         end do
 
     end function erlang_dist
+
+    !> Function to compute an array of NUM_SAMPLES samples 
+    !! from student t-distribution using adapted polar method [Bailey (1994)]
+    function t_dist(num_samples, nu) result(samples)
+
+        integer, intent(in)                   :: num_samples
+        real(kind=dp), intent(in)             :: nu
+        real(kind=dp), dimension(num_samples) :: samples
+        real(kind=dp), dimension(2)           :: u
+        real(kind=dp)                         :: w
+        integer                               :: i
+
+        samples = 0.d0
+        do i = 1,num_samples,1
+            w = 1.d10
+            do while (w>1.d0)
+                u = random(2)
+                u = 2*u-1
+                w = u(1)**2 + u(2)**2
+            end do
+            samples(i) = sqrt(nu * (w**(-2/nu) -1 )) * u(1)/sqrt(w)
+        end do
+
+    end function t_dist
 
 end module fr_sampling
